@@ -21,7 +21,11 @@ def mainMenu():
             elif options == 5:
                     decission = int(input('Are you sure you want to leave?(1 = yes, 0 = no): '))
                     if decission == 1:
-                        print('Thank you for using Expenses contabiliy!')
+                        print(''' 
+    ========================================
+    Thank you for using Expenses contabiliy!
+    ========================================
+                              ''')
                         break
                     elif decission == 0:
                         print('ok')

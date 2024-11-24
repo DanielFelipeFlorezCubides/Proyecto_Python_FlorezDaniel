@@ -1,0 +1,2 @@
+def calcularDiario(date):
+    return
