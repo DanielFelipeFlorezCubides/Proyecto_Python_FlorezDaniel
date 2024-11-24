@@ -1,4 +1,8 @@
-from Menu.mainMenu import mainMenu
+from Formula.logic import storage, matchingCategories
+# First we set a list with the possible options on the category section to not make the program more complex than it should be
+categoryOptions = ["basics bills", "food", "transportation", "entertainment", "others"]
+
+# Then we set the function in charge to display the menu to storage a new dictionary with the expense information
 def registrarMenu():
     while True:
             print(f'''
@@ -11,19 +15,25 @@ def registrarMenu():
                 expenseAmmount = float(input('Please type the amount: '))
                 if expenseAmmount <= 0:
                     raise ValueError()
-                category = input('ex. food, transportation, entertainment, others: ')
+                category = input("These are the categories: basics bills, food, transportation, entertainment, others. Please select one on the list: ").lower()
                 date = input('format (YYYY/MM/DD): ')
-                Description = input('Please type a short description of the expense: ')
+                description = input('Please type a short description of the expense: ')
                 print('''
     =============================================
                       ''')
+                if category in categoryOptions:
+                     pass
+                else:
+                     raise ValueError()
                 
-                option = int(input("Type '1' to save or '0' to cancel."))
-                if option == 1:
+                option = int(input("Type '1' to save or '0' to cancel: "))
+                if (option == 1):
+                    storage(expenseAmmount, category, date, description)
                     print('Expense saved successfully!')
-                elif option == 0:
+                    break
+                elif (option == 0):
                     print('Operation cancelled.')
                     break
             
-            except Exception as e:
-                print('Dear user, please type a correct ammount for the expense')
+            except ValueError as e:
+                print('Dear user, please type a correct ammount for the expense, or one of the listed categories.')

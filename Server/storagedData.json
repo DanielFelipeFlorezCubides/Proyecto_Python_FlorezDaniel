@@ -1,0 +1,20 @@
+[
+    {
+        "Expense": 50000.0,
+        "Category": "food",
+        "Date": "2024/11/24",
+        "Description": "Weekly food supplies"
+    },
+    {
+        "Expense": 100000.0,
+        "Category": "transportation",
+        "Date": "2024/11/24",
+        "Description": "Biweekly transportation budget"
+    },
+    {
+        "Expense": 50000.0,
+        "Category": "basics bills",
+        "Date": "2024/11/24",
+        "Description": "Water bill"
+    }
+]

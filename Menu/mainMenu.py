@@ -22,9 +22,9 @@ def mainMenu():
                     decission = int(input('Are you sure you want to leave?(1 = yes, 0 = no): '))
                     if decission == 1:
                         print(''' 
-    ========================================
-    Thank you for using Expenses contabiliy!
-    ========================================
+    =========================================
+    Thank you for using Expenses contability!
+    =========================================
                               ''')
                         break
                     elif decission == 0:

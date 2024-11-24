@@ -1,4 +1,4 @@
-from Menu.mainMenu import mainMenu
+
 def calculateTotal():
     while True:
         try:

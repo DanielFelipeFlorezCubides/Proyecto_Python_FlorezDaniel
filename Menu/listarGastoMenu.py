@@ -1,4 +1,4 @@
-from Menu.mainMenu import mainMenu
+
 def listarGasto():
     while True:
         try:

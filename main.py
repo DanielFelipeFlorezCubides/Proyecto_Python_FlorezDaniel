@@ -10,3 +10,4 @@ while True:
         case 2: listarGasto()
         case 3: calculateTotal()
         case 4: reportGenerator()
+        case _: exit()
