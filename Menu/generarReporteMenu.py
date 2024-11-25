@@ -22,4 +22,4 @@ def reportGenerator():
             else: raise ValueError()
         
         except ValueError as e:
-            print("Invalid option. Please choose a number between 1 and 4.")
+            print("\nInvalid option. Please choose a number between 1 and 4.")
