@@ -1,6 +1,7 @@
 import json
 from tabulate import tabulate
-from datetime import datetime
+from datetime import datetime, timedelta
+import calendar
 
 def read_file(path):
         with open(f'Server/{path}', 'r') as file:
@@ -79,6 +80,34 @@ def dateFilter():
         with open("Server/storagedData.json", "r", encoding="utf-8") as archivo:
             datos = json.load(archivo)
         
+        date = input("Please type the beginning date you want to filter(YYYY/MM/DD): ")
+        dateTwo = input("Please type the end date you want to filter(YYYY/MM/DD): ")
+        validaD = datetime.strptime(date, "%Y/%m/%d")
+        validaDt = datetime.strptime(dateTwo, "%Y/%m/%d")
+        if not validaD and validaDt:
+            raise ValueError()
+        
+        filtered = []
+
+        for dato in datos:
+            if date <= dato["Date"] <= dateTwo:
+                filtered.append(dato)
+        
+        if filtered:
+            titles = ["Expenses", "Category", "Date", "Description"]
+            chart = [list(dato.values()) for dato in filtered]
+            result = print(tabulate(chart, headers=titles, tablefmt="grid"))
+            return result
+        else:
+            print(f"\nThere's no any data for {date} date filter.")
+    except ValueError as e:
+        print("\nDear user, please type a correct date or format date (YYYY/MM/DD).")
+        
+def calculateDailyTotal():
+    try:
+        with open("Server/storagedData.json", "r", encoding="utf-8") as archivo:
+            datos = json.load(archivo)
+        
         date = input("Please type the date you want to filter(YYYY/MM/DD): ")
         validaD = datetime.strptime(date, "%Y/%m/%d")
         if not validaD:
@@ -91,11 +120,84 @@ def dateFilter():
                 filtered.append(dato)
         
         if filtered:
+            total = 0
             titles = ["Expenses", "Category", "Date", "Description"]
             chart = [list(dato.values()) for dato in filtered]
+            for dato in filtered:
+                total += dato["Expense"]
             result = print(tabulate(chart, headers=titles, tablefmt="grid"))
-            return result
+            resultTwo = print(f"\nThe total amount for the day {date} is: ${total}")
+            return result, resultTwo
+        
         else:
             print(f"\nThere's no any data for {date} date filter.")
     except ValueError as e:
-        print("\nDear user, please type a correct format fot the date (YYYY/MM/DD).")
+        print("\nDear user, please type a correct date or format date (YYYY/MM/DD).")
+        
+def calculateWeeklyTotal():
+    try:
+        with open("Server/storagedData.json", "r", encoding="utf-8") as archivo:
+            datos = json.load(archivo)
+        
+        date = input("Please type the beggining week date you want to filter(YYYY/MM/DD): ")
+        validaD = datetime.strptime(date, "%Y/%m/%d")
+        weekStart = validaD - timedelta(days=validaD.weekday())
+        weekEnd = weekStart + timedelta(days=6)
+        if not validaD:
+            raise ValueError()
+        
+        filtered = []
+
+        for dato in datos:
+            if weekStart <= datetime.strptime(dato["Date"], "%Y/%m/%d") <= weekEnd:
+                filtered.append(dato)
+        
+        if filtered:
+            total = 0
+            titles = ["Expenses", "Category", "Date", "Description"]
+            chart = [list(dato.values()) for dato in filtered]
+            for dato in filtered:
+                total += dato["Expense"]
+            result = print(tabulate(chart, headers=titles, tablefmt="grid"))
+            resultTwo = print(f"\nThe total amount for this week between {weekStart} and {weekEnd} was: ${total}")
+            return result, resultTwo
+        
+        else:
+            print(f"\nThere's no any data for {date} date filter.")
+    except ValueError as e:
+        print("\nDear user, please type a correct date or format date (YYYY/MM/DD).")
+        
+def calculateMonthlyTotal():
+    try:
+        with open("Server/storagedData.json", "r", encoding="utf-8") as archivo:
+            datos = json.load(archivo)
+        
+        date = input("Please type a date you want to filter(YYYY/MM/DD): ")
+        validaD = datetime.strptime(date, "%Y/%m/%d")
+        monthStarted = validaD.replace(day=1)
+        lastDay = calendar.monthrange(validaD.year, validaD.month)
+        monthEnd = monthStarted.replace(day=lastDay)
+        
+        if not validaD:
+            raise ValueError()
+        
+        filtered = []
+
+        for dato in datos:
+            if monthStarted <= datetime.strptime(dato["Date"], "%Y/%m/%d") <= monthEnd:
+                filtered.append(dato)
+        
+        if filtered:
+            total = 0
+            titles = ["Expenses", "Category", "Date", "Description"]
+            chart = [list(dato.values()) for dato in filtered]
+            for dato in filtered:
+                total += dato["Expense"]
+            result = print(tabulate(chart, headers=titles, tablefmt="grid"))
+            resultTwo = print(f"\nThe total amount for this month bwtween {monthStarted} and {monthEnd} is: ${total}")
+            return result, resultTwo
+        
+        else:
+            print(f"\nThere's no any data for {date} date filter.")
+    except ValueError as e:
+        print("\nDear user, please type a correct date or format date (YYYY/MM/DD).")

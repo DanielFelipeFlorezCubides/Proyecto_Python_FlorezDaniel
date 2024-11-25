@@ -22,5 +22,29 @@
         "Category": "entertainment",
         "Date": "2024/11/25",
         "Description": "Netflix monthly bill"
+    },
+    {
+        "Expense": 3000.0,
+        "Category": "others",
+        "Date": "2024/11/02",
+        "Description": ""
+    },
+    {
+        "Expense": 5000.0,
+        "Category": "others",
+        "Date": "2024/12/05",
+        "Description": "snacks"
+    },
+    {
+        "Expense": 40000.0,
+        "Category": "others",
+        "Date": "2024/11/22",
+        "Description": "Clothing"
+    },
+    {
+        "Expense": 100000.0,
+        "Category": "others",
+        "Date": "2024/11/27",
+        "Description": "Cake"
     }
 ]
