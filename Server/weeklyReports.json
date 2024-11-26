@@ -27,5 +27,34 @@
             ]
         ],
         "Description": "This is the report for this week between 2024-11-25 and 2024-12-01."
+    },
+    {
+        "Report": [
+            [
+                50000.0,
+                "food",
+                "2024/11/24",
+                "Weekly food supplies"
+            ],
+            [
+                100000.0,
+                "transportation",
+                "2024/11/24",
+                "Biweekly transportation budget"
+            ],
+            [
+                50000.0,
+                "basics bills",
+                "2024/11/24",
+                "Water bill"
+            ],
+            [
+                40000.0,
+                "others",
+                "2024/11/22",
+                "Clothing"
+            ]
+        ],
+        "Description": "This is the report for the week between 2024-11-18 and 2024-11-24."
     }
 ]

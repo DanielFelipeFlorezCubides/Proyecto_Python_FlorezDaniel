@@ -57,5 +57,22 @@
             ]
         ],
         "Description": "This is the report for this week between 2024-11-01 and 2024-11-30."
+    },
+    {
+        "Report": [
+            [
+                100000.0,
+                "basics bills",
+                "2024/10/10",
+                "Electricity bill"
+            ],
+            [
+                50000.0,
+                "others",
+                "2024/10/05",
+                "New shoes"
+            ]
+        ],
+        "Description": "This is the report for this week between 2024-11-01 and 2024-10-31."
     }
 ]

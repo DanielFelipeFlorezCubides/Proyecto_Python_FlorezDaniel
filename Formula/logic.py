@@ -252,7 +252,8 @@ def weeklyReport():
         datos = json.load(archivo)
         
     date = datetime.now().date()
-    weekStart = date - timedelta(days=date.weekday())
+    previousWeek = date - timedelta(weeks=1)
+    weekStart = previousWeek - timedelta(days=previousWeek.weekday())
     weekEnd = weekStart + timedelta(days=6)
         
     filtered = []
@@ -277,7 +278,8 @@ def storageWReport():
         datos = json.load(archivo)
 
     date = datetime.now().date()
-    weekStart = date - timedelta(days=date.weekday())
+    previousWeek = date - timedelta(weeks=1)
+    weekStart = previousWeek - timedelta(days=previousWeek.weekday())
     weekEnd = weekStart + timedelta(days=6)
 
     data = read_file('weeklyReports.json')
@@ -303,16 +305,15 @@ def monthlyReport():
         datos = json.load(archivo)
         
         date = datetime.now().date()
-
         monthStarted = date.replace(day=1)
-        _, lastDay = calendar.monthrange(date.year, date.month)
-        monthEnd = monthStarted.replace(day=lastDay)
+        monthEnd = monthStarted - timedelta(days=1)
+        previousMonthStarted = monthEnd.replace(day=1)
         
         filtered = []
         total = 0
         for dato in datos:
             formatoFecha = datetime.strptime(dato["Date"], "%Y/%m/%d").date()
-            if monthStarted <= formatoFecha <= monthEnd:
+            if previousMonthStarted <= formatoFecha <= monthEnd:
                 filtered.append(dato)
 
     if filtered:
@@ -321,7 +322,7 @@ def monthlyReport():
         for dato in filtered:
             total += dato["Expense"]
         result = print(tabulate(chart, headers=titles, tablefmt="grid"))
-        resultTwo = print(f"\nThe total amount for this month between {monthStarted} and {monthEnd} is: ${total}")
+        resultTwo = print(f"\nThe total amount for this month between {previousMonthStarted} and {monthEnd} is: ${total}")
         return result, resultTwo
     
 def storageMReport():
@@ -330,16 +331,17 @@ def storageMReport():
         
     date = datetime.now().date()
 
+    date = datetime.now().date()
     monthStarted = date.replace(day=1)
-    _, lastDay = calendar.monthrange(date.year, date.month)
-    monthEnd = monthStarted.replace(day=lastDay)
+    monthEnd = monthStarted - timedelta(days=1)
+    previousMonthStarted = monthEnd.replace(day=1)
 
     data = read_file('monthlyReports.json')
     filtered = []
 
     for dato in datos:
         formatoFecha = datetime.strptime(dato["Date"], "%Y/%m/%d").date()
-        if monthStarted <= formatoFecha <= monthEnd:
+        if previousMonthStarted <= formatoFecha <= monthEnd:
             filtered.append(dato)
 
     chart = [list(dato.values()) for dato in filtered]

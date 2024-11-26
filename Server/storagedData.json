@@ -58,5 +58,17 @@
         "Category": "basics bills",
         "Date": "2024/11/25",
         "Description": "Gas bill"
+    },
+    {
+        "Expense": 100000.0,
+        "Category": "basics bills",
+        "Date": "2024/10/10",
+        "Description": "Electricity bill"
+    },
+    {
+        "Expense": 50000.0,
+        "Category": "others",
+        "Date": "2024/10/05",
+        "Description": "New shoes"
     }
 ]
