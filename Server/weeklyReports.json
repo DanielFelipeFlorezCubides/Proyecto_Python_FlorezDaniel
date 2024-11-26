@@ -1,0 +1,31 @@
+[
+    {
+        "Report": [
+            [
+                20000.0,
+                "entertainment",
+                "2024/11/25",
+                "Netflix monthly bill"
+            ],
+            [
+                100000.0,
+                "others",
+                "2024/11/27",
+                "Cake"
+            ],
+            [
+                45000.0,
+                "others",
+                "2024/11/26",
+                "Restaurant dinner"
+            ],
+            [
+                50000.0,
+                "basics bills",
+                "2024/11/25",
+                "Gas bill"
+            ]
+        ],
+        "Description": "This is the report for this week between 2024-11-25 and 2024-12-01."
+    }
+]

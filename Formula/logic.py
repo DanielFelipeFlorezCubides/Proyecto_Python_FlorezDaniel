@@ -74,7 +74,7 @@ def categoryFilter():
         print("\nDear user, please type one of the listed categories.")
 
 # We can reutilize the previous code because this filter only changes the data to compare with.
-# Also, we have to use the library datetime to validate if the entered date is correct and in the order we requested it.
+# Also, we have to use the library datetime to validate if the entered date is correct and also in the order we requested it.
 def dateFilter():
     try:
         with open("Server/storagedData.json", "r", encoding="utf-8") as archivo:
@@ -102,7 +102,8 @@ def dateFilter():
             print(f"\nThere's no any data for {date} date filter.")
     except ValueError as e:
         print("\nDear user, please type a correct date or format date (YYYY/MM/DD).")
-        
+
+
 def calculateDailyTotal():
     try:
         with open("Server/storagedData.json", "r", encoding="utf-8") as archivo:
@@ -121,19 +122,17 @@ def calculateDailyTotal():
         
         if filtered:
             total = 0
-            titles = ["Expenses", "Category", "Date", "Description"]
-            chart = [list(dato.values()) for dato in filtered]
             for dato in filtered:
                 total += dato["Expense"]
-            result = print(tabulate(chart, headers=titles, tablefmt="grid"))
-            resultTwo = print(f"\nThe total amount for the day {date} is: ${total}")
-            return result, resultTwo
+            result = print(f"\nThe total amount for the day {date} is: ${total}")
+            return result
         
         else:
             print(f"\nThere's no any data for {date} date filter.")
     except ValueError as e:
         print("\nDear user, please type a correct date or format date (YYYY/MM/DD).")
-        
+
+
 def calculateWeeklyTotal():
     try:
         with open("Server/storagedData.json", "r", encoding="utf-8") as archivo:
@@ -154,19 +153,17 @@ def calculateWeeklyTotal():
         
         if filtered:
             total = 0
-            titles = ["Expenses", "Category", "Date", "Description"]
-            chart = [list(dato.values()) for dato in filtered]
             for dato in filtered:
                 total += dato["Expense"]
-            result = print(tabulate(chart, headers=titles, tablefmt="grid"))
-            resultTwo = print(f"\nThe total amount for this week between {weekStart} and {weekEnd} was: ${total}")
-            return result, resultTwo
+            result = print(f"\nThe total amount for this week between {weekStart} and {weekEnd} was: ${total}")
+            return result
         
         else:
             print(f"\nThere's no any data for {date} date filter.")
     except ValueError as e:
         print("\nDear user, please type a correct date or format date (YYYY/MM/DD).")
-        
+
+      
 def calculateMonthlyTotal():
     try:
         with open("Server/storagedData.json", "r", encoding="utf-8") as archivo:
@@ -175,7 +172,7 @@ def calculateMonthlyTotal():
         date = input("Please type a date you want to filter(YYYY/MM/DD): ")
         validaD = datetime.strptime(date, "%Y/%m/%d")
         monthStarted = validaD.replace(day=1)
-        lastDay = calendar.monthrange(validaD.year, validaD.month)
+        _, lastDay = calendar.monthrange(validaD.year, validaD.month)
         monthEnd = monthStarted.replace(day=lastDay)
         
         if not validaD:
@@ -189,15 +186,168 @@ def calculateMonthlyTotal():
         
         if filtered:
             total = 0
-            titles = ["Expenses", "Category", "Date", "Description"]
-            chart = [list(dato.values()) for dato in filtered]
             for dato in filtered:
                 total += dato["Expense"]
-            result = print(tabulate(chart, headers=titles, tablefmt="grid"))
-            resultTwo = print(f"\nThe total amount for this month bwtween {monthStarted} and {monthEnd} is: ${total}")
-            return result, resultTwo
+            result = print(f"\nThe total amount for this month bwtween {monthStarted} and {monthEnd} is: ${total}")
+            return result
         
         else:
             print(f"\nThere's no any data for {date} date filter.")
     except ValueError as e:
         print("\nDear user, please type a correct date or format date (YYYY/MM/DD).")
+
+
+def dailyReport():
+        with open("Server/storagedData.json", "r", encoding="utf-8") as archivo:
+            datos = json.load(archivo)
+        
+        date = datetime.now().date()
+        formato = date.strftime("%Y/%m/%d")
+        
+        filtered = []
+        total = 0
+
+        for dato in datos:
+            if dato["Date"] == formato:
+                filtered.append(dato)
+        
+        if filtered:
+            titles = ["Expenses", "Category", "Date", "Description"]
+            chart = [list(dato.values()) for dato in filtered]
+            for dato in filtered:
+                total += dato["Expense"]
+            resultThree = print(filtered)
+            result = print(tabulate(chart, headers=titles, tablefmt="grid"))
+            resultTwo = print(f"\nThe total amount for today is: ${total}")
+            return result, resultTwo, resultThree
+
+
+def storageDReport():
+    with open("Server/storagedData.json", "r", encoding="utf-8") as archivo:
+            datos = json.load(archivo)
+
+    date = datetime.now().date()
+    formato = date.strftime("%Y/%m/%d")
+
+    data = read_file('dailyReports.json')
+    filtered = []
+
+    for dato in datos:
+            if dato["Date"] == formato:
+                filtered.append(dato)
+
+    chart = [list(dato.values()) for dato in filtered]
+
+    formatoD = {
+        "Report": chart,
+        "Description": f"This is the report for {formato} date."
+        }
+    data.append(formatoD)
+    write_file(data, 'dailyReports.json')
+    return data
+
+
+def weeklyReport():
+    with open("Server/storagedData.json", "r", encoding="utf-8") as archivo:
+        datos = json.load(archivo)
+        
+    date = datetime.now().date()
+    weekStart = date - timedelta(days=date.weekday())
+    weekEnd = weekStart + timedelta(days=6)
+        
+    filtered = []
+    total = 0
+
+    for dato in datos:
+        formatoFecha = datetime.strptime(dato["Date"], "%Y/%m/%d").date()
+        if weekStart <= formatoFecha <= weekEnd:
+                filtered.append(dato)
+        
+    if filtered:
+        titles = ["Expenses", "Category", "Date", "Description"]
+        chart = [list(dato.values()) for dato in filtered]
+        for dato in filtered:
+            total += dato["Expense"]
+        result = print(tabulate(chart, headers=titles, tablefmt="grid"))
+        resultTwo = print(f"\nThe total amount for this week {date} is: ${total}")
+        return result, resultTwo
+        
+def storageWReport():
+    with open("Server/storagedData.json", "r", encoding="utf-8") as archivo:
+        datos = json.load(archivo)
+
+    date = datetime.now().date()
+    weekStart = date - timedelta(days=date.weekday())
+    weekEnd = weekStart + timedelta(days=6)
+
+    data = read_file('weeklyReports.json')
+    filtered = []
+
+    for dato in datos:
+        formatoFecha = datetime.strptime(dato["Date"], "%Y/%m/%d").date()
+        if weekStart <= formatoFecha <= weekEnd:
+            filtered.append(dato)
+
+    chart = [list(dato.values()) for dato in filtered]
+
+    formatoD = {
+        "Report": chart,
+        "Description": f"This is the report for the week between {weekStart} and {weekEnd}."
+        }
+    data.append(formatoD)
+    write_file(data, 'weeklyReports.json')
+    return data
+
+def monthlyReport():
+    with open("Server/storagedData.json", "r", encoding="utf-8") as archivo:
+        datos = json.load(archivo)
+        
+        date = datetime.now().date()
+
+        monthStarted = date.replace(day=1)
+        _, lastDay = calendar.monthrange(date.year, date.month)
+        monthEnd = monthStarted.replace(day=lastDay)
+        
+        filtered = []
+        total = 0
+        for dato in datos:
+            formatoFecha = datetime.strptime(dato["Date"], "%Y/%m/%d").date()
+            if monthStarted <= formatoFecha <= monthEnd:
+                filtered.append(dato)
+
+    if filtered:
+        titles = ["Expenses", "Category", "Date", "Description"]
+        chart = [list(dato.values()) for dato in filtered]
+        for dato in filtered:
+            total += dato["Expense"]
+        result = print(tabulate(chart, headers=titles, tablefmt="grid"))
+        resultTwo = print(f"\nThe total amount for this month between {monthStarted} and {monthEnd} is: ${total}")
+        return result, resultTwo
+    
+def storageMReport():
+    with open("Server/storagedData.json", "r", encoding="utf-8") as archivo:
+        datos = json.load(archivo)
+        
+    date = datetime.now().date()
+
+    monthStarted = date.replace(day=1)
+    _, lastDay = calendar.monthrange(date.year, date.month)
+    monthEnd = monthStarted.replace(day=lastDay)
+
+    data = read_file('monthlyReports.json')
+    filtered = []
+
+    for dato in datos:
+        formatoFecha = datetime.strptime(dato["Date"], "%Y/%m/%d").date()
+        if monthStarted <= formatoFecha <= monthEnd:
+            filtered.append(dato)
+
+    chart = [list(dato.values()) for dato in filtered]
+
+    formatoD = {
+        "Report": chart,
+        "Description": f"This is the report for this week between {monthStarted} and {monthEnd}."
+        }
+    data.append(formatoD)
+    write_file(data, 'monthlyReports.json')
+    return data

@@ -3,6 +3,9 @@ from Menu.registrarGastoMenu import registrarMenu
 from Menu.listarGastoMenu import listarGasto
 from Menu.generarReporteMenu import reportGenerator
 from Menu.calcularTotalMenu import calculateTotal
+from Menu.reporteDiarioMenu import dailyReportMenu
+from Menu.reporteSemanalMenu import weeklyReportMenu
+from Menu.reporteMensualMenu import monthlyReportMenu
 from Formula.logic import listar, categoryFilter, dateFilter, calculateDailyTotal, calculateWeeklyTotal, calculateMonthlyTotal
 
 while True:
@@ -18,5 +21,9 @@ while True:
             if (option == 1): calculateDailyTotal()
             elif (option == 2): calculateWeeklyTotal()
             elif (option == 3): calculateMonthlyTotal()
-        case 4: reportGenerator()
+        case 4: 
+            option = reportGenerator()
+            if (option == 1): dailyReportMenu()
+            elif(option == 2): weeklyReportMenu()
+            elif(option == 3): monthlyReportMenu()
         case _: exit()

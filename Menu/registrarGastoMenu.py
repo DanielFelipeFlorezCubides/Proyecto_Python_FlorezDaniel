@@ -34,7 +34,7 @@ def registrarMenu():
                 option = int(input("Type '1' to save or '0' to cancel: "))
                 if (option == 1):
                     storage(expenseAmmount, category, date, description)
-                    print('Expense saved successfully!')
+                    print('Expense successfully saved!')
                     break
                 elif (option == 0):
                     print('Operation cancelled.')

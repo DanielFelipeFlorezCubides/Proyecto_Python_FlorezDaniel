@@ -46,5 +46,17 @@
         "Category": "others",
         "Date": "2024/11/27",
         "Description": "Cake"
+    },
+    {
+        "Expense": 45000.0,
+        "Category": "others",
+        "Date": "2024/11/26",
+        "Description": "Restaurant dinner"
+    },
+    {
+        "Expense": 50000.0,
+        "Category": "basics bills",
+        "Date": "2024/11/25",
+        "Description": "Gas bill"
     }
 ]

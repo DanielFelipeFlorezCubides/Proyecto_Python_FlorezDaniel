@@ -1,4 +1,4 @@
-
+import os
 def listarGasto():
     while True:
         try:
@@ -18,6 +18,7 @@ def listarGasto():
             if (options >= 1 and options <= 3):
                 return options
             elif options == 4:
+                os.system('Clear')
                 break
             else: raise ValueError()
         

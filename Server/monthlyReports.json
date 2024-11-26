@@ -1,0 +1,61 @@
+[
+    {
+        "Report": [
+            [
+                50000.0,
+                "food",
+                "2024/11/24",
+                "Weekly food supplies"
+            ],
+            [
+                100000.0,
+                "transportation",
+                "2024/11/24",
+                "Biweekly transportation budget"
+            ],
+            [
+                50000.0,
+                "basics bills",
+                "2024/11/24",
+                "Water bill"
+            ],
+            [
+                20000.0,
+                "entertainment",
+                "2024/11/25",
+                "Netflix monthly bill"
+            ],
+            [
+                3000.0,
+                "others",
+                "2024/11/02",
+                ""
+            ],
+            [
+                40000.0,
+                "others",
+                "2024/11/22",
+                "Clothing"
+            ],
+            [
+                100000.0,
+                "others",
+                "2024/11/27",
+                "Cake"
+            ],
+            [
+                45000.0,
+                "others",
+                "2024/11/26",
+                "Restaurant dinner"
+            ],
+            [
+                50000.0,
+                "basics bills",
+                "2024/11/25",
+                "Gas bill"
+            ]
+        ],
+        "Description": "This is the report for this week between 2024-11-01 and 2024-11-30."
+    }
+]
